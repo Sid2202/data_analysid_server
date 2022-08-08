@@ -37,12 +37,14 @@ app.listen(PORT, () => {
 // })
 const element={}
 const db = require('./connect')
-const {parse, stringify} = require('flatted');
-const a = db.query("SELECT * FROM customers WHERE age>25", function (err, result) {
-    if (err) throw err;
-    console.log(stringify(result[0]));
-  });
+//const {parse, stringify} = require('flatted');
+
 
   app.get("/a", (req, res) => {
-    res.send(stringify(a[0]));
+    db.query("SELECT cid FROM customers WHERE age>25", function (err, result) {
+      if (err) throw err;
+      console.log((result));
+      res.send(result)
+    });
+    // res.send(a);
   });
